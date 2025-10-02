@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RGPV Student Performance Predictor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="/static/logo.png" alt="RGPV Logo" class="logo">
+            <h1>🎓 RGPV V Semester - Student Predictor</h1>
+            <p><a href="{{ url_for('teacher') }}" target="_blank" class="teacher-link">👩‍🏫 Teacher: Upload Class CSV (Batch Predict)</a></p>
+        </header>
+
+        <div class="form-card">
+            <form action="/predict" method="post">
+                {% for key, value in max_marks.items() %}
+                    <div class="input-group">
+                        <label>{{key}} (Max: {{value}}):</label>
+                        <input type="number" name="{{key}}" max="{{value}}" required>
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn">Predict</button>
+            </form>
+        </div>
+
+        {% if prediction %}
+            <div class="result-card">
+                <h2>{{ prediction }}</h2>
+                <p>{{ suggestion }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

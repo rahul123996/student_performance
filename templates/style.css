@@ -1,0 +1,136 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #f2f2f2, #d9e4f5);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 20px;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+h1 {
+    color: #003366;
+}
+
+.teacher-link {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 8px 15px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.teacher-link:hover {
+    background-color: #1e7e34;
+}
+
+.form-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin: 12px 0;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 80%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    padding: 12px 25px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-link {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #ffc107;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.btn-link:hover {
+    background-color: #e0a800;
+}
+
+.result-card {
+    background: #ffffffcc;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+table {
+    margin: 20px auto;
+    border-collapse: collapse;
+    width: 95%;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #003366;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.flashes {
+    color: red;
+    list-style: none;
+    padding: 0;
+}

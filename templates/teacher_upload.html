@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Upload - Class Predictions</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="/static/logo.png" alt="RGPV Logo" class="logo">
+            <h1>👩‍🏫 Teacher: Upload Class CSV (Max 100 Rows)</h1>
+            <p>CSV must contain columns: <strong>StudentID, Name, AL501, AL502, AL503, AL504, AL505, AL506, AL507, AL508, Attendance, Assignments</strong></p>
+        </header>
+
+        <div class="form-card">
+            <form action="/predict_batch" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".csv" required>
+                <button type="submit" class="btn">Upload & Predict</button>
+            </form>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        {% if total_count %}
+            <div class="result-card">
+                <h2>Results for {{ total_count }} students</h2>
+
+                {% if result_file %}
+                    <p><a href="{{ url_for('download_file', filename=result_file) }}" class="btn-link">Download Full Results CSV</a></p>
+                {% endif %}
+
+                <h3>Top 10 Students</h3>
+                <table>
+                    <tr>
+                        <th>StudentID</th><th>Name</th><th>Total Marks</th><th>Label</th>
+                        <th>P(Excellent)</th><th>Attendance OK</th><th>Assignments Full</th><th>Suggestion</th>
+                    </tr>
+                    {% for r in top10 %}
+                    <tr>
+                        <td>{{ r.StudentID }}</td>
+                        <td>{{ r.Name }}</td>
+                        <td>{{ r.total_marks }}</td>
+                        <td>{{ r.predicted_label }}</td>
+                        <td>{{ ('%.2f'|format(r.proba_excellent)) }}</td>
+                        <td>{{ r.attendance_ok }}</td>
+                        <td>{{ r.assignments_full }}</td>
+                        <td>{{ r.suggestion }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+                <h3>Bottom 10 Students</h3>
+                <table>
+                    <tr>
+                        <th>StudentID</th><th>Name</th><th>Total Marks</th><th>Label</th>
+                        <th>P(Excellent)</th><th>Attendance OK</th><th>Assignments Full</th><th>Suggestion</th>
+                    </tr>
+                    {% for r in bottom10 %}
+                    <tr>
+                        <td>{{ r.StudentID }}</td>
+                        <td>{{ r.Name }}</td>
+                        <td>{{ r.total_marks }}</td>
+                        <td>{{ r.predicted_label }}</td>
+                        <td>{{ ('%.2f'|format(r.proba_excellent)) }}</td>
+                        <td>{{ r.attendance_ok }}</td>
+                        <td>{{ r.assignments_full }}</td>
+                        <td>{{ r.suggestion }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+
+                <h3>Students with Attendance ≥ 75%</h3>
+                <ul>
+                    {% for a in attendance_list %}
+                        <li>{{ a.StudentID }} - {{ a.Name }} ({{ a.Attendance }}%)</li>
+                    {% endfor %}
+                </ul>
+
+                <h3>Students who submitted all assignments</h3>
+                <ul>
+                    {% for s in assignments_full_list %}
+                        <li>{{ s.StudentID }} - {{ s.Name }} ({{ s.Assignments }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
